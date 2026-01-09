@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ubgames</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,Arial}
+body{background:#000;color:#fff}
+
+/* TOP */
+.topbar{
+  display:flex;
+  gap:16px;
+  align-items:center;
+  padding:16px 22px;
+  border-bottom:1px solid #1b1b1b;
+}
+.logo{font-size:20px;font-weight:700}
+.search{
+  flex:1;
+  background:#111;
+  border:none;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:999px;
+}
+.search::placeholder{color:#777}
+
+/* SECTION */
+.section{padding:22px}
+.section h2{margin-bottom:14px}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:16px;
+}
+
+/* CARD */
+.card{
+  height:100px;
+  background:#141414;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  transition:.25s ease;
+  padding:10px;
+}
+.card:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 30px rgba(255,255,255,.15);
+}
+
+/* PLAYER */
+.player{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:none;
+  flex-direction:column;
+  z-index:999;
+}
+.player-top{
+  background:#111;
+  padding:12px 18px;
+  display:flex;
+  justify-content:space-between;
+}
+.player iframe{flex:1;border:none}
+.close{cursor:pointer;color:#ff5c5c}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="logo">🍑 ubgames</div>
+  <input class="search" id="search" placeholder="Search games..." oninput="filterGames()">
+</div>
+
+<!-- POPULAR -->
+<div class="section">
+<h2>Popular</h2>
+<div class="grid" id="popular">
+  <div class="card" data-name="masked forces"
+    onclick="play('https://www.onlinegames.io/games/2022/unity2/masked-special-forces/index.html')">
+    Masked Forces
+  </div>
+</div>
+</div>
+
+<!-- ALL GAMES -->
+<div class="section">
+<h2>All Games</h2>
+<div class="grid" id="games">
+
+<div class="card" data-name="tekken 3" onclick="play('https://www.retrogames.cc/embed/40238-tekken-3.html')">Tekken 3</div>
+<div class="card" data-name="contender 2" onclick="play('https://www.retrogames.cc/embed/40077-contender-2.html')">Contender 2</div>
+<div class="card" data-name="dbz supersonic" onclick="play('https://www.retrogames.cc/embed/28096-dragon-ball-z-supersonic-warriors-k-projectg.html')">DBZ Supersonic</div>
+<div class="card" data-name="street fighter ii" onclick="play('https://www.retrogames.cc/embed/10030-street-fighter-ii-champion-edition-street-fighter-2-920513-etc.html')">Street Fighter II</div>
+<div class="card" data-name="fifa 2000" onclick="play('https://www.retrogames.cc/embed/17484-fifa-2000-usa.html')">FIFA 2000</div>
+
+<div class="card" data-name="brainrot heist" onclick="play('https://cloud.onlinegames.io/games/2026/unity/steal-brainrot-heist/game.html')">Brainrot Heist</div>
+<div class="card" data-name="fast food manager" onclick="play('https://cloud.onlinegames.io/games/2025/unity4/fast-food-manager/index-og.html')">Fast Food Manager</div>
+<div class="card" data-name="highway cars" onclick="play('https://www.onlinegames.io/games/2023/construct/211/highway-cars/index.html')">Highway Cars</div>
+<div class="card" data-name="guerrillas io" onclick="play('https://www.onlinegames.io/games/2023/unity2/guerrillas-io/index.html')">Guerrillas.io</div>
+<div class="card" data-name="drift fury" onclick="play('https://www.onlinegames.io/games/2023/unity/drift-fury/index.html')">Drift Fury</div>
+<div class="card" data-name="crazy moto racing" onclick="play('https://cloud.onlinegames.io/games/2022/unity3/crazy-moto-racing/index-og.html')">Crazy Moto Racing</div>
+<div class="card" data-name="taxi simulator" onclick="play('https://www.onlinegames.io/games/2022/unity/taxi-simulator/index.html')">Taxi Simulator</div>
+<div class="card" data-name="mech shooter" onclick="play('https://www.onlinegames.io/games/2022/unity/mech-shooter/index.html')">Mech Shooter</div>
+<div class="card" data-name="stickman parkour" onclick="play('https://cloud.onlinegames.io/games/2024/construct/219/stickman-parkour/index-og.html')">Stickman Parkour</div>
+<div class="card" data-name="flight simulator" onclick="play('https://cloud.onlinegames.io/games/2023/unity2/real-flight-simulator/index.html')">Flight Simulator</div>
+<div class="card" data-name="geometry dash" onclick="play('https://www.onlinegames.io/games/2023/q2/geometry-dash-freezenova/index.html')">Geometry Dash</div>
+<div class="card" data-name="agent smith" onclick="play('https://www.onlinegames.io/games/2021/unity/agent-smith/index.html')">Agent Smith</div>
+<div class="card" data-name="fnf funk 3d" onclick="play('https://www.onlinegames.io/games/2022/unity/fnf-funk-3d/index.html')">FNF Funk 3D</div>
+<div class="card" data-name="davo" onclick="play('https://cloud.onlinegames.io/games/2025/construct/302/davo/index-og.html')">DAVO</div>
+<div class="card" data-name="the farmer" onclick="play('https://www.onlinegames.io/games/2022/unity/the-farmer/index.html')">The Farmer</div>
+<div class="card" data-name="war simulator" onclick="play('https://www.onlinegames.io/games/2021/unity2/war-simulator/index.html')">War Simulator</div>
+<div class="card" data-name="toonz io" onclick="play('https://www.onlinegames.io/games/2021/unity3/toonz-io/index.html')">Toonz.io</div>
+<div class="card" data-name="funny shooter" onclick="play('https://www.onlinegames.io/games/2024/unity/funny-shooter-bro/index.html')">Funny Shooter</div>
+<div class="card" data-name="zombie defense" onclick="play('https://www.onlinegames.io/games/2022/unity/zombie-war-defense/index.html')">Zombie Defense</div>
+<div class="card" data-name="idle dev startup" onclick="play('https://www.onlinegames.io/games/2023/unity3/idle-dev-startup/index.html')">Idle Dev Startup</div>
+
+</div>
+</div>
+
+<!-- PLAYER -->
+<div class="player" id="player">
+  <div class="player-top">
+    <div>Now Playing</div>
+    <div class="close" onclick="closePlayer()">✖ Close</div>
+  </div>
+  <iframe id="frame" allowfullscreen></iframe>
+</div>
+
+<script>
+function play(url){
+  frame.src = url;
+  player.style.display = "flex";
+}
+function closePlayer(){
+  frame.src = "";
+  player.style.display = "none";
+}
+
+function filterGames(){
+  const q = search.value.toLowerCase();
+  document.querySelectorAll('.card').forEach(c=>{
+    c.style.display = c.dataset.name.includes(q) ? 'flex' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
